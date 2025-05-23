@@ -26,12 +26,26 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
+    const groupsCollection = client.db('groupsdb').collection('allgroups');
+
+    app.post('/groups', async(req, res)=>{
+        const newGroup = req.body;
+        console.log(newGroup);
+        const result = await groupsCollection.insertOne(newGroup);
+        console.log('result', result);
+        res.send(result);
+    })
+
+
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
