@@ -29,6 +29,11 @@ async function run() {
 
     const groupsCollection = client.db('groupsdb').collection('allgroups');
 
+    app.get('/groups', async(req, res) => {
+        const result = await groupsCollection.find().toArray();
+        res.send(result);
+    })
+
     app.post('/groups', async(req, res)=>{
         const newGroup = req.body;
         console.log(newGroup);
