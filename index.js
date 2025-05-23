@@ -39,6 +39,12 @@ async function run() {
         const result = await groupsCollection.findOne(query);
         res.send(result);
     })
+    app.get('/mygroups/:name', async(req, res) => {
+        const name = req.params.name;
+        const query = { userName: name };
+        const result = await groupsCollection.find(query).toArray();
+        res.send(result);
+    })
 
     app.post('/groups', async(req, res)=>{
         const newGroup = req.body;
