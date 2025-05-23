@@ -53,6 +53,17 @@ async function run() {
         console.log('result', result);
         res.send(result);
     })
+    app.put('/groups/:id', async(req, res) => {
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) };
+        const options = { upsert: true};
+        const updatedData = req.body;
+        const updateDoc = {
+            $set: updatedData
+        }
+        const result = await groupsCollection.updateOne(query, updateDoc, options);
+        res.send(result);
+    })
 
 
 
