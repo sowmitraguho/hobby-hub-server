@@ -64,6 +64,12 @@ async function run() {
         const result = await groupsCollection.updateOne(query, updateDoc, options);
         res.send(result);
     })
+    app.delete('/groups/:id', async(req, res) => {
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) };
+        const result = await groupsCollection.deleteOne(query);
+        res.send(result);
+    })
 
 
 
