@@ -1,3 +1,4 @@
 node_modules
 important_notes.js
 .env
+.vercel

@@ -28,7 +28,12 @@ async function run() {
     await client.connect();
 
     const groupsCollection = client.db('groupsdb').collection('allgroups');
+    const usersCollection = client.db('groupsdb').collection('users');
 
+    app.get('/users', async(req, res) => {
+        const result = await usersCollection.find().toArray();
+        res.send(result);
+    })
     app.get('/groups', async(req, res) => {
         const result = await groupsCollection.find().toArray();
         res.send(result);
@@ -87,12 +92,12 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('coffee server is ready');
+    res.send('HobbyHub server is ready');
 });
 
 app.listen(port, () => {
-    console.log(`Coffee server is running on port ${port}`);
+    console.log(`HobbyHub server is running on port ${port}`);
 });
 
-// serversite github repo: https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-sowmitraguho
+
 
