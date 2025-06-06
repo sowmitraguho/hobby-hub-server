@@ -44,11 +44,12 @@ async function run() {
         const result = await groupsCollection.findOne(query);
         res.send(result);
     })
-    app.get('/groups/:email', async(req, res) => {
-        const name = req.params.email;
-        const query = { userEmail: email };
+    app.get('/mygroups/:email', async(req, res) => {
+        const userEemailFromParams = req.params.email;
+        const query = { userEmail: userEemailFromParams };
+
         const result = await groupsCollection.find(query).toArray();
-        //console.log(result);
+        
         res.send(result);
     })
 
